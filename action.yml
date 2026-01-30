@@ -1,0 +1,82 @@
+# action.yml
+name: 'INSPECTA-Codegeb-CI-Action'
+description: 'INSPECTA CI action to generate code from a SySML (v2) model'
+inputs:
+  sysmlv2-files:  # id of input
+    description: 'JSON-formatted list of SySML model files to include in the analysis.'
+    required: true
+  sourcepaths:
+    description: 'JSON-formatted list of source paths of SysML v2 .sysml files (expects path strings).'
+    required: false
+  line:
+    description: Line number containing the system to instantiate in the <sysmlv2-file> argument (expects an integer; min is 0)
+    required: false
+    default: 0
+  system-name:
+    description: 'Fully qualified name of the system to instantiate (expects a string)'
+    required: false
+  verbose:
+    description: 'Enable verbose mode'
+    required: false
+    default: 'false'
+  runtime-monitoring:
+    description: 'Enable runtime monitoring'
+    required: false
+    default: 'false'
+  platform:
+    description: 'Target platform (expects one of { JVM, Linux, Cygwin, MacOS, seL4, seL4_Only, seL4_TB, Microkit, ros2 })'
+    required: false
+    default: 'JVM'
+  output-dir:
+    description: 'Default output directory (expects a path).'
+    required: false
+    default: ''
+  parseable-messages:
+    description: 'Print parseable file messages.'
+    required: false
+    default: 'false'
+  slang-options:
+    description: 'Slang options in JSON-formatted dictionary.  See README.md for detailed description.'
+    required: 'false'
+    default: ''
+  transpiler-options:
+    description: 'Transpiler options in JSON-formatted dictionary.  See README.md for detailed description.'
+    required: 'false'
+    default: ''
+  camkes-microkit-options:
+    description: 'CAmkES/Microkit options in JSON-formatted dictionary.  See README.md for detailed description.'
+    required: 'false'
+    default: ''
+  ros2-options:
+    description: 'ROS2 options in JSON-formatted dictionary.  See README.md for detailed description.'
+    required: 'false'
+    default: ''
+  experimental-options:
+    description: 'Experimental options in JSON-formatted list.'
+    required: 'false'
+    default: ''
+outputs:
+  timestamp:
+    description: 'The date/time that the code generation was completed'
+  status:
+    description: 'Summary of code generation status'
+  status-messages: 
+    description: 'Description of code generation status'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.sysmlv2-files }}
+    - ${{ inputs.sourcepaths }}
+    - ${{ inputs.line }}
+    - ${{ inputs.system-name }}
+    - ${{ inputs.verbose }}
+    - ${{ inputs.runtime-monitoring }}
+    - ${{ inputs.platform }}
+    - ${{ inputs.output-dir }}
+    - ${{ inputs.parseable-messages }}
+    - ${{ inputs.slang-options }}
+    - ${{ inputs.transpiler-options }}
+    - ${{ inputs.camkes-microkit-options }}
+    - ${{ inputs.ros2-options }}
+    - ${{ inputs.experimental-options }}
