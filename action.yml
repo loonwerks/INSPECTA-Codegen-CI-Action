@@ -8,6 +8,7 @@ inputs:
   sourcepaths:
     description: 'JSON-formatted list of source paths of SysML v2 .sysml files (expects path strings).'
     required: false
+    default: 'software'
   line:
     description: Line number containing the system to instantiate in the <sysmlv2-file> argument (expects an integer; min is 0)
     required: false

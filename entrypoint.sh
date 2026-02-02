@@ -161,7 +161,7 @@ fi
 # SysMLv2 files
 runCommand+=($(echo $1 | jq -r 'join(" ")'))
 
-outputFile="logika.out"
+outputFile="codegen.out"
 if [[ -n $3 ]]; then
 	outputFile=$3
 fi
