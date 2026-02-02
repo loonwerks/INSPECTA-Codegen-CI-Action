@@ -12,7 +12,6 @@ inputs:
   line:
     description: Line number containing the system to instantiate in the <sysmlv2-file> argument (expects an integer; min is 0)
     required: false
-    default: 0
   system-name:
     description: 'Fully qualified name of the system to instantiate (expects a string)'
     required: false
