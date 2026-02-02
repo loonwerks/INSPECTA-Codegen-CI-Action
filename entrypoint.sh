@@ -175,16 +175,6 @@ echo "timestamp=$(date)" >> $GITHUB_OUTPUT
 echo "status=${EXIT_CODE}" >> $GITHUB_OUTPUT
 echo "status-messages=$(cat ${outputFile} | jq -R -s '.')" >> $GITHUB_OUTPUT
 
-# Check in the generated code...
-git config --global --add safe.directory $GITHUB_WORKSPACE
-git config --global user.name "${GITHUB_ACTION}"
-git config --global user.email "loonwerks@github.com"
-for file in $(git status --porcelain | cut -c 4-); do
-	git add $file
-done
-git commit -m "Generate code with ${GITHUB_ACTION}"
-git push
-
 echo "exit code: $EXIT_CODE"
 if [ "XX $EXIT_CODE" = "XX 0" ]; then
 	exit 0
