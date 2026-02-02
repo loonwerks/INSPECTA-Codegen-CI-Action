@@ -21,7 +21,7 @@ runCommand=(/Sireum/bin/sireum hamr sysml codegen)
 if [[ -n $2 ]]; then
 	sourcePaths=$(echo $2 | jq -r 'join(",")')
 	if [[ -n $sourcePaths ]]; then
-		runCommand+=(--sourcepaths $sourcePaths)
+		runCommand+=(--sourcepath $sourcePaths)
 	fi
 fi
 
