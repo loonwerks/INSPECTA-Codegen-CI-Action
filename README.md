@@ -1,6 +1,8 @@
 # INSPECTA-Logika-CI-Action
 
-INSPECTA CI action to conduct Logika analysis on a SySML (v2) model
+INSPECTA CI action to conduct Logika analysis on a SySML (v2) model.
+
+This action requires use of the `persist-credentials` with clause on the `actions/checkout` checking out the repository to which this action is applied.
 
 ## Inputs
 
