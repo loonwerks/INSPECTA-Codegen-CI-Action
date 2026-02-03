@@ -10,11 +10,11 @@ echo "runtime-monitoring: $6"
 echo "platform: $7"
 echo "output-dir: $8"
 echo "parseable-messages: $9"
-echo "slang-options ${10}"
-echo "transpiler-options ${11}"
-echo "camkes-microkit-options ${12}"
-echo "ros2-options ${13}"
-echo "experimental-options ${14}"
+echo "slang-options: ${10}"
+echo "transpiler-options: ${11}"
+echo "camkes-microkit-options: ${12}"
+echo "ros2-options: ${13}"
+echo "experimental-options: ${14}"
 
 runCommand=(/Sireum/bin/sireum hamr sysml codegen)
 
@@ -83,11 +83,11 @@ fi
 
 # Transpiler options
 if [[ -n ${11} ]]; then
-	auxCodeDirs=$(echo ${11} | jq -r '.["aux-code-dirs] | join(",")')
+	auxCodeDirs=$(echo ${11} | jq '.["aux-code-dirs"]')
 	if [[ -n $auxCodeDirs ]]; then
-		runCommand+=(--aux-code-dirs $auxCodeDirs)
+		runCommand+=(--aux-code-dirs $(echo ${auxCodeDirs} | jq 'join(",")'))
 	fi
-	outputCDir=$(echo ${11} | jq '.["output-c-dir]')
+	outputCDir=$(echo ${11} | jq '.["output-c-dir"]')
 	if [[ -n $outputCDir ]]; then
 		runCommand+=(--output-c-dir $outputCDir)
 	fi
@@ -119,7 +119,7 @@ if [[ -n ${12} ]]; then
 	if [[ -n $sel4OutputDir ]]; then
 		runCommand+=(--sel4-output-dir $sel4OutputDir)
 	fi
-	sel4AuxCodeDirs+=$(echo ${12} | jq -r '.["sel4-aux-code-dirs] | join(",")')
+	sel4AuxCodeDirs+=$(echo ${12} | jq -r '.["sel4-aux-code-dirs"] | join(",")')
 	if [[ -n $sel4AuxCodeDirs ]]; then
 		runCommand+=(--sel4-aux-code-dirs $sel4AuxCodeDirs)
 	fi
