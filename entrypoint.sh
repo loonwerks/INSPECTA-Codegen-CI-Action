@@ -83,9 +83,9 @@ fi
 
 # Transpiler options
 if [[ -n ${11} ]]; then
-	auxCodeDirs=$(echo ${11} | jq '."aux-code-dirs" // empty')
+	auxCodeDirs=$(echo ${11} | jq -r '."aux-code-dirs" // empty | join(",")')
 	if [[ -n $auxCodeDirs ]]; then
-		runCommand+=(--aux-code-dirs $(echo ${auxCodeDirs} | jq 'join(",")'))
+		runCommand+=(--aux-code-dirs $(echo ${auxCodeDirs} | jq ''))
 	fi
 	outputCDir=$(echo ${11} | jq '."output-c-dir" // empty')
 	if [[ -n $outputCDir ]]; then
@@ -99,7 +99,7 @@ if [[ -n ${11} ]]; then
 	if [[ -n $bitWidth ]]; then
 		runCommand+=(--bit-width $bitWidth)
 	fi
-	maxStringSize=$(echo ${11} | jq '."max-string-size" // empty]')
+	maxStringSize=$(echo ${11} | jq '."max-string-size" // empty')
 	if [[ -n $maxStringSize ]]; then
 		runCommand+=(--max-string-size $maxStringSize)
 	fi
