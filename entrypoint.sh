@@ -58,27 +58,27 @@ fi
 
 # Slang options
 if [[ -n ${10} ]]; then
-	slangOutputDir=$(echo ${10} | jq '."slang-output-dir" // empty')
+	slangOutputDir=$(echo ${10} | jq -r '."slang-output-dir" // empty')
 	if [[ -n $slangOutputDir ]]; then
 		runCommand+=(--slang-output-dir $slangOutputDir)
 	fi
-	packageName=$(echo ${10} | jq '."package-name" // empty')
+	packageName=$(echo ${10} | jq -r '."package-name" // empty')
 	if [[ -n $packageName ]]; then
 		runCommand+=(--package-name $packageName)
 	fi
-	noProyekIve=$(echo ${10} | jq '."no-proyek-ive" // empty')
+	noProyekIve=$(echo ${10} | jq -r '."no-proyek-ive" // empty')
 	if [ "XX $noProyekIve" = "XX true" ]; then
 		runCommand+=(--no-proyek-ive)
 	fi
-	noEmbedArt=$(echo ${10} | jq '."no-embed-art" // empty')
+	noEmbedArt=$(echo ${10} | jq -r '."no-embed-art" // empty')
 	if [ "XX $noEmbedArt" = "XX true" ]; then
 		runCommand+=(--no-embed-art)
 	fi
-	devicesAsThread=$(echo ${10} | jq '."devices-as-thread" // empty')
+	devicesAsThread=$(echo ${10} | jq -r '."devices-as-thread" // empty')
 	if [ "XX $devicesAsThread" = "XX true" ]; then
 		runCommand+=(--devices-as-thread)
 	fi
-	sbtMill=$(echo ${10} | jq '."sbt-mill" // empty')
+	sbtMill=$(echo ${10} | jq -r '."sbt-mill" // empty')
 	if [ "XX $sbtMill" = "XX true" ]; then
 		runCommand+=(--sbt-mill)
 	fi
@@ -88,29 +88,29 @@ fi
 if [[ -n ${11} ]]; then
 	auxCodeDirs=$(echo ${11} | jq -r '."aux-code-dirs" // empty | join(",")')
 	if [[ -n $auxCodeDirs ]]; then
-		runCommand+=(--aux-code-dirs $(echo ${auxCodeDirs} | jq ''))
+		runCommand+=(--aux-code-dirs $(echo ${auxCodeDirs} | jq -r ''))
 	fi
-	outputCDir=$(echo ${11} | jq '."output-c-dir" // empty')
+	outputCDir=$(echo ${11} | jq -r '."output-c-dir" // empty')
 	if [[ -n $outputCDir ]]; then
 		runCommand+=(--output-c-dir $outputCDir)
 	fi
-	excludeComponentImpl=$(echo ${11} | jq '."exclude-component-impl" // empty')
+	excludeComponentImpl=$(echo ${11} | jq -r '."exclude-component-impl" // empty')
 	if [ "XX $excludeComponentImpl" = "XX true" ]; then
 		runCommand+=(--exclude-component-impl)
 	fi
-	bitWidth=$(echo ${11} | jq '."bit-width" // empty')
+	bitWidth=$(echo ${11} | jq -r '."bit-width" // empty')
 	if [[ -n $bitWidth ]]; then
 		runCommand+=(--bit-width $bitWidth)
 	fi
-	maxStringSize=$(echo ${11} | jq '."max-string-size" // empty')
+	maxStringSize=$(echo ${11} | jq -r '."max-string-size" // empty')
 	if [[ -n $maxStringSize ]]; then
 		runCommand+=(--max-string-size $maxStringSize)
 	fi
-	maxArraySize=$(echo ${11} | jq '."max-array-size" // empty')
+	maxArraySize=$(echo ${11} | jq -r '."max-array-size" // empty')
 	if [[ -n $maxArraySize ]]; then
 		runCommand+=(--max-array-size $maxArraySize)
 	fi
-	runTranspiler=$(echo ${11} | jq '."run-transpiler" // empty')
+	runTranspiler=$(echo ${11} | jq -r '."run-transpiler" // empty')
 	if [ "XX $runTranspiler" = "XX true" ]; then
 		runCommand+=(--run-transpiler)
 	fi
@@ -118,7 +118,7 @@ fi
 
 # CAmkES/Microkit options
 if [[ -n ${12} ]]; then
-	sel4OutputDir=$(echo ${12} | jq '."sel4-output-dir" // empty')
+	sel4OutputDir=$(echo ${12} | jq -r '."sel4-output-dir" // empty')
 	if [[ -n $sel4OutputDir ]]; then
 		runCommand+=(--sel4-output-dir $sel4OutputDir)
 	fi
@@ -126,7 +126,7 @@ if [[ -n ${12} ]]; then
 	if [[ -n $sel4AuxCodeDirs ]]; then
 		runCommand+=(--sel4-aux-code-dirs $sel4AuxCodeDirs)
 	fi
-	workspaceRootDir=$(echo ${12} | jq '."workspace-root-dir" // empty')
+	workspaceRootDir=$(echo ${12} | jq -r '."workspace-root-dir" // empty')
 	if [[ -n $workspaceRootDir ]]; then
 		runCommand+=(--workspace-root-dir $workspaceRootDir)
 	fi
@@ -134,23 +134,23 @@ fi
 
 # ROS2 options
 if [[ -n ${13} ]]; then
-	ros2OutputWorkspaceDir=$(echo ${13} | jq '."ros2-output-workspace-dir" // empty')
+	ros2OutputWorkspaceDir=$(echo ${13} | jq -r '."ros2-output-workspace-dir" // empty')
 	if [[ -n $ros2OutputWorkspaceDir ]]; then
 		runCommand+=(--ros2-output-workspace-dir $ros2OutputWorkspaceDir)
 	fi
-	ros2Dir=$(echo ${13} | jq '."ros2-dir" // empty')
+	ros2Dir=$(echo ${13} | jq -r '."ros2-dir" // empty')
 	if [[ -n $ros2Dir ]]; then
 		runCommand+=(--ros2-dir $ros2Dir)
 	fi
-	ros2NodesLanguage=$(echo ${13} | jq '."ros2-nodes-language" // empty')
+	ros2NodesLanguage=$(echo ${13} | jq -r '."ros2-nodes-language" // empty')
 	if [[ -n $ros2NodesLanguage ]]; then
 		runCommand+=(--ros2-nodes-language $ros2NodesLanguage)
 	fi
-	ros2LaunchLanguage=$(echo ${13} | jq '."ros2-launch-language" // empty')
+	ros2LaunchLanguage=$(echo ${13} | jq -r '."ros2-launch-language" // empty')
 	if [[ -n $ros2LaunchLanguage ]]; then
 		runCommand+=(--ros2-launch-language $ros2LaunchLanguage)
 	fi
-	invertTopicBinding=$(echo ${13} | jq '."invert-topic-binding" // empty')
+	invertTopicBinding=$(echo ${13} | jq -r '."invert-topic-binding" // empty')
 	if [ "XX $invertTopicBinding" = "XX true" ]; then
 		runCommand+=(--invert-topic-binding)
 	fi
