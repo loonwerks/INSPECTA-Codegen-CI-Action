@@ -16,6 +16,9 @@ echo "camkes-microkit-options: ${12}"
 echo "ros2-options: ${13}"
 echo "experimental-options: ${14}"
 
+# Capture the version of Sireum used for this run
+/Sireum/bin/sireum --version
+
 runCommand=(/Sireum/bin/sireum hamr sysml codegen)
 
 if [[ -n $2 ]]; then
