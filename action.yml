@@ -1,5 +1,5 @@
 # action.yml
-name: 'INSPECTA-Codegeb-CI-Action'
+name: 'INSPECTA-Codegen-CI-Action'
 description: 'INSPECTA CI action to generate code from a SySML (v2) model'
 inputs:
   sysmlv2-files:  # id of input
