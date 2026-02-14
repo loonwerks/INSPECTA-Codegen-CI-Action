@@ -17,9 +17,9 @@ echo "ros2-options: ${13}"
 echo "experimental-options: ${14}"
 
 # Capture the version of Sireum used for this run
-/Sireum/bin/sireum --version
+sireum --version
 
-runCommand=(/Sireum/bin/sireum hamr sysml codegen)
+runCommand=(sireum hamr sysml codegen)
 
 if [[ -n $2 ]]; then
 	sourcePaths=$(echo $2 | jq -r 'join(",")')
@@ -171,7 +171,7 @@ fi
 
 echo "run command: ${runCommand[@]}" 
 
-"${runCommand[@]}" >> "$outputFile"
+"${runCommand[@]}" >> "$outputFile" 2>&1
 EXIT_CODE=$?
 
 echo "timestamp=$(date)" >> $GITHUB_OUTPUT
