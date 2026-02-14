@@ -206,6 +206,6 @@ The JSON-formatted summary of analysis results.
 
 ## Example usage
 
-uses: actions/AGREE-CI-Action@v1
+uses: actions/INSPECTA-Codegen-CI-Action@v1
 with:
-  component-to-analyze: 'Octocat.impl'
+  sysmlv2-files: 'system/Platform.sysml'
