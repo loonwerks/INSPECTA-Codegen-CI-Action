@@ -198,6 +198,10 @@ Optimization options in JSON-formatted dictionary as shown below.  All key-value
 
 JSON-formatted list of experimental options.  See Sireum documentation.
 
+### `report-filename`
+
+The name of the file into which to write the JSON-formatted code generation analysis report.  Default: 'codegen-report.json'.
+
 ## Outputs
 
 ## `result`

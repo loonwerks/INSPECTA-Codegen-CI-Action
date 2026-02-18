@@ -55,6 +55,10 @@ inputs:
     description: 'Experimental options in JSON-formatted list.'
     required: 'false'
     default: ''
+  report-filename:
+    description: 'The name of the file into which to write the JSON-formatted code generation analysis report.'
+    required: 'false'
+    default: 'codegen-report.json'
 outputs:
   timestamp:
     description: 'The date/time that the code generation was completed'
@@ -78,3 +82,4 @@ runs:
     - ${{ inputs.camkes-microkit-options }}
     - ${{ inputs.ros2-options }}
     - ${{ inputs.experimental-options }}
+    - ${{ inputs.report-filename }}
