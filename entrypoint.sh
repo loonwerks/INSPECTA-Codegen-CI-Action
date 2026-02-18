@@ -15,6 +15,7 @@ echo "transpiler-options: ${11}"
 echo "camkes-microkit-options: ${12}"
 echo "ros2-options: ${13}"
 echo "experimental-options: ${14}"
+echo "report-filename: ${15}"
 
 # Capture the version of Sireum used for this run
 sireum --version
@@ -161,6 +162,11 @@ if [[ -n ${14} ]]; then
 	experimentalOptions=$(echo ${14} | jq -r 'join(";")')
 fi
 
+reportFilename="codegen-report.json"
+if [[ -n ${15} ]]; then
+	reportFilename=${15}
+fi
+
 # SysMLv2 files
 runCommand+=($(echo $1 | jq -r 'join(" ")'))
 
@@ -169,14 +175,29 @@ if [[ -n $3 ]]; then
 	outputFile=$3
 fi
 
+startTimestamp=$(date)
+
 echo "run command: ${runCommand[@]}" 
 
 "${runCommand[@]}" >> "$outputFile" 2>&1
 EXIT_CODE=$?
 cat $outputFile
 
-echo "timestamp=$(date)" >> $GITHUB_OUTPUT
+echo "timestamp=${startTimestamp}" >> $GITHUB_OUTPUT
 echo "status=${EXIT_CODE}" >> $GITHUB_OUTPUT
+
+clocReportFilename=$(mktemp)
+cloc $GITHUB_WORKSPACE/system/hamr/microkit --exclude-lang=YAML --exclude-dir=reporting --json --report-file=$clocReportFilename
+
+codeGenMessages=$(mktemp)
+clocReportFilenameSub=$(mktemp)
+cat $outputFile | jq --raw-input . | jq --slurp '{"messages" : .}' > $codeGenMessages
+jq '{"cloc" : .}' $clocReportFilename > $clocReportFilenameSub
+jq -s 'add' $codeGenMessages $clocReportFilenameSub \
+    | jq --arg timestamp "${startTimestamp}" \
+	    --arg exitcode $EXIT_CODE '. += $ARGS.named' \
+        > $reportFilename
+rm $clocReportFilename $clocReportFilenameSub $codeGenMessages
 
 echo "exit code: $EXIT_CODE"
 if [ "XX $EXIT_CODE" = "XX 0" ]; then
