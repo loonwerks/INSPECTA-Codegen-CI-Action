@@ -37,27 +37,27 @@ inputs:
     default: 'false'
   slang-options:
     description: 'Slang options in JSON-formatted dictionary.  See README.md for detailed description.'
-    required: 'false'
+    required: false
     default: ''
   transpiler-options:
     description: 'Transpiler options in JSON-formatted dictionary.  See README.md for detailed description.'
-    required: 'false'
+    required: false
     default: ''
   camkes-microkit-options:
     description: 'CAmkES/Microkit options in JSON-formatted dictionary.  See README.md for detailed description.'
-    required: 'false'
+    required: false
     default: ''
   ros2-options:
     description: 'ROS2 options in JSON-formatted dictionary.  See README.md for detailed description.'
-    required: 'false'
+    required: false
     default: ''
   experimental-options:
     description: 'Experimental options in JSON-formatted list.'
-    required: 'false'
+    required: false
     default: ''
   report-filename:
     description: 'The name of the file into which to write the JSON-formatted code generation analysis report.'
-    required: 'false'
+    required: false
     default: 'codegen-report.json'
 outputs:
   timestamp:
